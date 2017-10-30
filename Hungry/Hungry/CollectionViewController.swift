@@ -10,11 +10,37 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class CollectionViewController: UICollectionViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    @IBOutlet var collectionView: UICollectionView!
+class CollectionViewController: UICollectionViewController {
+    
+    func apiCall(){
+        let url = URL(string:"http://api.yummly.com/v1/api/recipes?_app_id=0d8e8a84&_app_key=108d39dca04337a59dfb5ccb9241bd78&savory")
+        let task = URLSession(configuration: URLSessionConfiguration.default ).dataTask(with: url!, completionHandler: {
+            (data, response, error) in
+            if error != nil {
+                
+                print(error!.localizedDescription)
+                
+            } else {
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
+                    {
+
+                        print(json)
+                    }
+                    
+                } catch {
+                    print("error in JSONSerialization")
+                    
+                }
+            }
+            
+        })
+        task.resume()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        apiCall()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
