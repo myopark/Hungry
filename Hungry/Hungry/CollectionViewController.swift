@@ -11,9 +11,13 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class CollectionViewController: UICollectionViewController {
+    @IBOutlet weak var sample: UIImageView!
     
-    func apiCall(){
-        let url = URL(string:"http://api.yummly.com/v1/api/recipes?_app_id=0d8e8a84&_app_key=108d39dca04337a59dfb5ccb9241bd78&savory")
+    var imageArray = [String]()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let url = URL(string:"http://api.yummly.com/v1/api/recipes?_app_id=0d8e8a84&_app_key=108d39dca04337a59dfb5ccb9241bd78&savory&requirePictures=true")
         let task = URLSession(configuration: URLSessionConfiguration.default ).dataTask(with: url!, completionHandler: {
             (data, response, error) in
             if error != nil {
@@ -24,24 +28,24 @@ class CollectionViewController: UICollectionViewController {
                 do {
                     if let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
                     {
-
-                        print(json)
+                        if let m = json["matches"] as? [NSDictionary]{
+                            for image in m {
+                                var urlString = String(describing: image["smallImageUrls"]!)
+                                self.imageArray.append(urlString)
+                            }
+                        }
                     }
-                    
                 } catch {
                     print("error in JSONSerialization")
-                    
                 }
             }
             
         })
-        task.resume()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        apiCall()
-
+        print(self.imageArray)
+       // if let url = URL(string:su) {
+       //     sample.contentMode = .scaleAspectFit
+        //   downloadImage(url: url)
+      //  }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -49,7 +53,26 @@ class CollectionViewController: UICollectionViewController {
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
+        task.resume()
     }
+    
+    func downloadImage(url: URL) {
+        print("Download Started")
+        getDataFromUrl(url: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            DispatchQueue.main.async() {
+                self.sample.image = UIImage(data: data)
+            }
+        }
+    }
+    func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            completion(data, response, error)
+            }.resume()
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

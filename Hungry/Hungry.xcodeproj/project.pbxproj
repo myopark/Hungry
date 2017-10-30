@@ -17,7 +17,6 @@
 		A7A0C94A1FA57B4C0019DE63 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A0C9491FA57B4C0019DE63 /* Recipe.swift */; };
 		A7A0C94C1FA681AC0019DE63 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A0C94B1FA681AC0019DE63 /* CollectionViewController.swift */; };
 		A7A0C94E1FA6860A0019DE63 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A0C94D1FA6860A0019DE63 /* CollectionViewCell.swift */; };
-		A7B2A6A21FA68F24002E4417 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B2A6A11FA68F24002E4417 /* APIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		A7A0C9491FA57B4C0019DE63 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		A7A0C94B1FA681AC0019DE63 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		A7A0C94D1FA6860A0019DE63 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		A7B2A6A11FA68F24002E4417 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +75,6 @@
 				A7A0C9491FA57B4C0019DE63 /* Recipe.swift */,
 				A7A0C94B1FA681AC0019DE63 /* CollectionViewController.swift */,
 				A7A0C94D1FA6860A0019DE63 /* CollectionViewCell.swift */,
-				A7B2A6A11FA68F24002E4417 /* APIClient.swift */,
 			);
 			path = Hungry;
 			sourceTree = "<group>";
@@ -157,7 +154,6 @@
 				A7A0C94C1FA681AC0019DE63 /* CollectionViewController.swift in Sources */,
 				A738E02D1FA0129F00FD37E8 /* Hungry.xcdatamodeld in Sources */,
 				A738E0271FA0129F00FD37E8 /* ViewController.swift in Sources */,
-				A7B2A6A21FA68F24002E4417 /* APIClient.swift in Sources */,
 				A7A0C94E1FA6860A0019DE63 /* CollectionViewCell.swift in Sources */,
 				A7A0C94A1FA57B4C0019DE63 /* Recipe.swift in Sources */,
 				A7A0C9481FA579E80019DE63 /* FilterTableViewController.swift in Sources */,
