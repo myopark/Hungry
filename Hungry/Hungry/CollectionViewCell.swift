@@ -9,5 +9,11 @@
 import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
-    
+    //TODO: connect the image to here
+    //TODO: connect the url image here
+    var imageName: String! {
+        didSet {
+            //photoImageView.image = UIImage(named: imageName)
+        }
+    }
 }

@@ -10,18 +10,31 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
+
 class CollectionViewController: UICollectionViewController {
     @IBOutlet weak var sample: UIImageView!
     
     var imageArray = [String]()
-
+    struct Storyboard {
+        static let photoCell = "PhotoCell"
+        static let headerView = "HeaderView"
+        static let showDetailSegue = "ShowDetail"
+        
+        static let leftAndRightPaddings: CGFloat = 2.0
+        static let numberOfItemsPerRow: CGFloat = 3.0
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let collectionViewWidth = collectionView?.frame.width
+        let itemWidth = (collectionViewWidth! - Storyboard.leftAndRightPaddings) / Storyboard.numberOfItemsPerRow
+        
+        let layout = collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
         let url = URL(string:"http://api.yummly.com/v1/api/recipes?_app_id=0d8e8a84&_app_key=108d39dca04337a59dfb5ccb9241bd78&savory&requirePictures=true")
         let task = URLSession(configuration: URLSessionConfiguration.default ).dataTask(with: url!, completionHandler: {
             (data, response, error) in
             if error != nil {
-                
                 print(error!.localizedDescription)
                 
             } else {
@@ -30,8 +43,11 @@ class CollectionViewController: UICollectionViewController {
                     {
                         if let m = json["matches"] as? [NSDictionary]{
                             for image in m {
-                                var urlString = String(describing: image["smallImageUrls"]!)
-                                self.imageArray.append(urlString)
+                                let urlString = image["smallImageUrls"]!
+                                self.imageArray.append(String(describing:urlString))
+                            }
+                            DispatchQueue.main.async {
+                                self.collectionView?.reloadData()
                             }
                         }
                     }
@@ -39,15 +55,9 @@ class CollectionViewController: UICollectionViewController {
                     print("error in JSONSerialization")
                 }
             }
-            
         })
-        print(self.imageArray)
-       // if let url = URL(string:su) {
-       //     sample.contentMode = .scaleAspectFit
-        //   downloadImage(url: url)
-      //  }
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -56,24 +66,6 @@ class CollectionViewController: UICollectionViewController {
         task.resume()
     }
     
-    func downloadImage(url: URL) {
-        print("Download Started")
-        getDataFromUrl(url: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
-            DispatchQueue.main.async() {
-                self.sample.image = UIImage(data: data)
-            }
-        }
-    }
-    func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            completion(data, response, error)
-            }.resume()
-    }
-
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -93,23 +85,40 @@ class CollectionViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        //change
+        return self.imageArray.count
     }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> CollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
+                                                  for: indexPath) as! CollectionViewCell
+        //2
+        cell.backgroundColor = UIColor.black
+        cell.foodImage = self.imageArray[indexPath.row]
+        //TODO: put cell for API images
+        //TODO: figure out how to different sized cells
+      //  return cell
         return cell
     }
-
+    /*
+     TODO:
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
+    {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Storyboard.headerView, for: indexPath) as! HeaderView
+        let category = photoCategories[indexPath.section]
+        
+        headerView.category = category
+        
+        return headerView
+    }
+    
+*/
     // MARK: UICollectionViewDelegate
 
     /*

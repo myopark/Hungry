@@ -11,7 +11,7 @@ import Foundation
 class Recipe {
     var name: String
     var photo: UIImage?
-    
+    //TODO
     init(name:String, photo:UIImage?){
         self.name = name
         self.photo = photo

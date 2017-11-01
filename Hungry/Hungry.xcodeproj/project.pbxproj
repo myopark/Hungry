@@ -73,8 +73,8 @@
 				A738E02B1FA0129F00FD37E8 /* Hungry.xcdatamodeld */,
 				A7A0C9471FA579E80019DE63 /* FilterTableViewController.swift */,
 				A7A0C9491FA57B4C0019DE63 /* Recipe.swift */,
-				A7A0C94B1FA681AC0019DE63 /* CollectionViewController.swift */,
 				A7A0C94D1FA6860A0019DE63 /* CollectionViewCell.swift */,
+				A7A0C94B1FA681AC0019DE63 /* CollectionViewController.swift */,
 			);
 			path = Hungry;
 			sourceTree = "<group>";
