@@ -7,6 +7,7 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+<<<<<<< HEAD
 	<key>CFBundleDisplayName</key>
 	<string></string>
 	<key>NSTransportSecurity</key>
@@ -29,6 +30,8 @@
 	</dict>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+=======
+>>>>>>> 9c6237d082e310164ed37b96621cb55e8a05991f
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
