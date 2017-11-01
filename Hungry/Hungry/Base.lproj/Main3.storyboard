@@ -130,6 +130,7 @@
         <!--Item-->
         <scene sceneID="evH-BT-lmG">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q7q-hj-ywg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="krH-56-U0L" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="m8D-bM-1R5"/>
                     <toolbarItems/>
@@ -142,7 +143,6 @@
                         <segue destination="59m-5c-ThA" kind="relationship" relationship="rootViewController" id="1w6-fX-ekx"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q7q-hj-ywg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-954" y="-79"/>
         </scene>
